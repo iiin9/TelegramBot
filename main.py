@@ -1,14 +1,13 @@
-import os
 import re
 
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
+import config
 import sel_2
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
-bot = Bot(token=TELEGRAM_TOKEN)
+bot = Bot(token=config.TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
 
 
@@ -19,13 +18,13 @@ async def cmd_start(message: types.Message):
 
 @dp.message_handler(lambda message: re.fullmatch(
     r"[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]\d\d\d[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]{2}\d{2,3}", str(message.text).upper()))
-async def without_pure(message: types.Message):
-    await message.answer("Номер распознан.")
-    ans = sel_2.search(message.text)
-    if 'Не указан параметр' in ans:
-        await message.reply("Возникла ошибка при проверке.")
-    else:
-        await message.answer(ans, parse_mode=types.ParseMode.HTML)
+async def without_pure(msg: types.Message):
+    msg_0 = await msg.answer("Номер распознан.")
+    msg_data = sel_2.search(msg.text)
+    msg_1 = await msg.answer(text=msg_data, parse_mode=types.ParseMode.HTML)
+    await bot.edit_message_text(text=msg_data, parse_mode=types.ParseMode.HTML, chat_id=msg_0.chat.id.numerator,
+                                message_id=msg_0.message_id)
+    await bot.delete_message(msg_1.chat.id, msg_1.message_id)
 
 
 @dp.message_handler()

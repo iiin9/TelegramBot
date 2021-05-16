@@ -29,8 +29,10 @@ def search(search_text):
             raise Exception(f"Не указан параметр:{error}")
         element = driver.find_element_by_xpath('/html/body/div[2]/div/main/div[1]/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div').text
         data_dict['Марка'] = element
+        print(element)
         element = driver.find_element_by_xpath('/html/body/div[2]/div/main/div[1]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/div').text
         data_dict['Модель'] = element
+        print(element)
         elements = driver.find_elements_by_css_selector('[class = "form-el__content valid filled"]')
         for el in elements:
             a = el.find_element_by_css_selector(
