@@ -19,7 +19,7 @@ async def cmd_start(message: types.Message):
 @dp.message_handler(lambda message: re.fullmatch(
     r"[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]\d\d\d[А, В, Е, К, М, Н, О, Р, С, Т, У, Х]{2}\d{2,3}", str(message.text).upper()))
 async def without_pure(msg: types.Message):
-    msg_0= await msg.answer("Номер распознан.")
+    msg_0 = await msg.answer("Номер распознан.")
     msg_data = sel_2.search(msg.text)
     msg_1 = await msg.answer(text=msg_data, parse_mode=types.ParseMode.HTML)
     await bot.edit_message_text(text=msg_data, parse_mode=types.ParseMode.HTML, chat_id=msg_0.chat.id.numerator,
