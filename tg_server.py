@@ -21,10 +21,8 @@ async def cmd_start(message: types.Message):
 async def without_pure(msg: types.Message):
     msg_0 = await msg.answer("Номер распознан.")
     msg_data = sel_2.search(msg.text)
-    msg_1 = await msg.answer(text=msg_data, parse_mode=types.ParseMode.HTML)
-    await bot.edit_message_text(text=msg_data, parse_mode=types.ParseMode.HTML, chat_id=msg_0.chat.id.numerator,
-                                message_id=msg_0.message_id)
-    await bot.delete_message(msg_1.chat.id, msg_1.message_id)
+    await msg.answer(text=msg_data, parse_mode=types.ParseMode.HTML)
+    await bot.delete_message(msg_0.chat.id, msg_0.message_id)
 
 
 @dp.message_handler()
